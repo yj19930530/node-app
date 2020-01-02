@@ -1,4 +1,5 @@
-module.exports.ok = () => {
+
+module.exports.ISOK = () => {
     return {
         code: 200,
         msg: 'ok'

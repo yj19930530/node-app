@@ -1,18 +1,12 @@
 // 持久层
 // 获取用户列表
 var mongoose = require("mongoose");
-// const { ok, PARAMETER_ERROR, LOSE_EFFICACY_TOKEN, PARAMETER_ERROR, SERVICE_ERROR } = require('../utils/resStatus.js');
-module.exports.usersTableList = async ({ pageNum, pageSize }) => {
-    let list = mongoose.model('user');
-    let data = await list.find().sort({ _id: -1 }).skip((pageNum - 1) * pageSize).limit(pageSize).exec();
-    total = await list.find().count();
-    return {
-        data: data,
-        total: total,
-        code: 200,
-        msg: ''
-    }
+const { ADD_DATA_FNC, POPULATE_DATA, DELETE_DATA, FIND_DATA } = require('../utils/common.js');
+// 查询用户列表
+module.exports.usersTableList = async (data) => {
+    return await FIND_DATA(data)
 }
+// 新增用户
 module.exports.addUser = async (data) => {
     await mongoose.model('user').create(data);
     return {
@@ -20,4 +14,19 @@ module.exports.addUser = async (data) => {
         data: [],
         msg: '操作成功'
     }
+}
+// 删除用户
+module.exports.deleteUser = async (id) => {
+    const ids = id.split(',');
+    const mongo = mongoose.model('user');
+    ids.forEach(async item => {
+        await mongo.deleteOne({
+            _id: item
+        })
+    })
+    return true;
+}
+// 修改用户
+module.exports.editUser = async (id, data) => {
+    return await POPULATE_DATA(id, data, 'user');
 }

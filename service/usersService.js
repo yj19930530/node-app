@@ -1,5 +1,5 @@
 // 业务层
-const { usersTableList, addUser } = require('../dao/usersDao.js');
+const { usersTableList, addUser, deleteUser, editUser } = require('../dao/usersDao.js');
 // 获取用户列表
 module.exports.usersTableList = async (data) => {
     return await usersTableList(data);
@@ -7,4 +7,15 @@ module.exports.usersTableList = async (data) => {
 // 新增用户
 module.exports.addUser = async (data) => {
     return await addUser(data);
+}
+// 删除用户
+module.exports.deleteUser = async (id) => {
+    return await deleteUser(id);
+}
+// 编辑用户
+module.exports.deleteUser = async (id) => {
+    return await deleteUser(id);
+}
+module.exports.editUser = async (id, data) => {
+    return await editUser(id, data);
 }
