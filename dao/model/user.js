@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 const userSchema = new mongoose.Schema({
     userName: String, // 姓名
     userPhone: String, // 手机号
